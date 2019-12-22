@@ -26,8 +26,7 @@
 
 #article p{
 	font-size: 110%;
-	color: #404040;
-	text-indent: 20px;
+	color: #505050;
 }
 
 #article a{
@@ -41,23 +40,25 @@
 
 #article span{
 	font-size: 110%;
-	color: #404040;
+	color: #505050;
 	text-indent: 20px;
 }
 
 #article i{
 	font-size: 110%;
-	color: #404040;
+	color: #505050;
 	text-indent: 20px;
 }
 
-#article blockquote{
+#article blockquote {
 	width: 100%;
-	border-left:3px solid #d0d0d0;
+    border-left:3px solid #d0d0d0;
+	position: relative;
+    left: 9px;
+    font-style: italic;
+    padding-left: 10px;
 }
 
-#article blockquote i{
-	position: relative;
+#article blockquote p {
 	color: #a0a0a0 !important;
-	left: 9px;
 }
