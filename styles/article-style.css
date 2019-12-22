@@ -1,0 +1,63 @@
+#article{}
+
+#article h1{
+	font-size: 300% ;
+	font-weight: 100;
+	text-align: center;
+}
+
+#article h2{
+	font-size: 200% ;
+	font-weight: 100;
+	color: #101010;
+}
+
+#article h3{
+	font-size: 150% ;
+	font-weight: 100;
+	color: #202020;
+}
+
+#article h4{
+	font-size: 125% ;
+	font-weight: 100;
+	color: #303030;
+}
+
+#article p{
+	font-size: 110%;
+	color: #404040;
+	text-indent: 20px;
+}
+
+#article a{
+	color: #b01;
+	text-decoration: none; 
+}
+
+#article a:hover{
+	text-decoration: underline; 
+}
+
+#article span{
+	font-size: 110%;
+	color: #404040;
+	text-indent: 20px;
+}
+
+#article i{
+	font-size: 110%;
+	color: #404040;
+	text-indent: 20px;
+}
+
+#article blockquote{
+	width: 100%;
+	border-left:3px solid #d0d0d0;
+}
+
+#article blockquote i{
+	position: relative;
+	color: #a0a0a0 !important;
+	left: 9px;
+}
