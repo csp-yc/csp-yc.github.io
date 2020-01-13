@@ -1,0 +1,246 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常见技巧 - 异常OI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/atom-one-dark.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
+    <script src="https://cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+    <link rel="stylesheet" href="../styles/addition.css">
+    <link rel="stylesheet" href="../styles/article-style.css">
+    <script src="../scripts/common.js"></script>
+</head>
+<body> 
+    <!--这里是顶栏-->
+    <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide mdui-color-white">
+        <div class="mdui-toolbar mdui-color-white">
+            <a href="../index.html" class="mdui-typo-title"><img src="https://s2.ax1x.com/2019/12/22/QxY8MR.png" height="25px" style="margin-bottom: -5px"> 异常OI</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+        </div>
+        <div class="mdui-tab mdui-color-white" mdui-tab>
+            <a href="../index.html" class="mdui-ripple mdui-ripple-white mdui-tab-active">首页</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white">语言基础</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white">基础算法</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white">动态规划</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white">数据结构</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white">数学</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white">图论</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white">计算几何</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white">杂项</a>
+        </div>
+    </div>
+    <!--页面主要部分，包括侧边栏和主要容器-->
+    <div class="mdui-container-fluid"style="margin-top: 150px; margin-bottom: 100px;">
+        <!--这里是侧边栏-->
+        <div class="mdui-col-md-2 mdui-col-offset-md-1" id="sidebar">
+            <div class="sidebar-title">简介</div>
+            <div class="sidebar-item"><a href="../intro/about.html">关于本站</a></div>
+            <div class="sidebar-item"><a href="../intro/oi.html">OI 赛制与赛事</a></div>
+            <div class="sidebar-item"><a href="../intro/resources.html">学习资源</a></div>
+            <div class="sidebar-item"><a href="../intro/mistakes.html">常见错误</a></div>
+            <div class="sidebar-item"><a href="../intro/tricks.html">常见技巧</a></div>
+            <div class="sidebar-item"><a href="../intro/contribute.html">如何参与</a></div>
+            <div class="sidebar-item"><a href="../intro/friends.html">友情链接</a></div>
+            <div class="sidebar-item"><a href="../intro/thanks.html">特别感谢</a></div>
+            <div class="sidebar-item"><a href="../intro/faq.html">F.A.Q.</a></div>
+        </div>
+        <!--主要容器-->
+        <div class="mdui-col-md-8">
+            <div id="article">
+                <h1>常见技巧</h1>
+                <p>本页面记载一些常用的技巧（有待完善）</p>
+                <p>由于本页面内容较杂，所以加入目录</p>
+                <h2>目录</h2>
+                <ul>
+                    <li>
+                        <a href="#OI优化">OI优化</a>
+                        <ul>
+                            <li><a href="#读入优化">读入优化</a></li>
+                            <li><a href="#输出优化">输出优化</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#对拍">对拍</a>
+                        <a href="#如何卡常">如何卡常</a>
+                    </li>
+                </ul>
+                <h2 id="OI优化">IO优化</h2>
+                <p>众所周知，在某些数据结构题当中，IO量极大。而输入和输出有需要一定的时间。这个时候，我们的程序运行起来就会出现如下的情况：</p>
+                <del>留给那位大♂人的时间不多了</del>
+                <p>所以这时候，我们就需要一个叫做IO优化的东西。（OI需要IO优化）</p>
+                <p>（限于作者水平，本文仅讲述当下被称作“龟速快读”的OI优化）</p>
+                <h2 id="读入优化">读入优化：</h2>
+                <p>原理：<code>getchar()</code>函数的效率相对较高</p>
+                <p>代码：</p>
+                <pre><code class="cpp">int get() {
+    int x = 0, f = -1; char c = getchar();
+    while(!isdigit(c)) { if(c == '-') f = -1; c = getchar(); }
+    while(isdigit(c)) { x = x * 10 + c - '0'; c = getchar(); }
+    return x * f;
+}</code></pre>
+                <p>解释：</p>
+                <li>第一行：变量，c是字符，读入数字减去'0'的ASCII码值，x是读入数的绝对值，f是符号</li>
+                <li>第二行：吃掉多余字符，并且在其中识别出'-'号（<code>!isdigit()</code>表示不是数位）</li>
+                <li>第三行：读入数字，举个例子，现在x=123，我们接受到了一个字符c='4'，下一个x就是10x+c-'0'，即1234</li>
+                <li>最后返回一个带有符号的数</li>
+                <p>当然前面的<code>int</code>可以换成<code>template&lt;typename T&gt;</code>这类东西</p>
+                <p>我们在对它进行一些更改，使得它能够读入实数</p>
+                <pre><code class="cpp">double getlf(){
+    double x = 0, y = 1.0; int f = 1; char c = getchar();
+    while(!isdigit(c)) { if(c == '-') f = -1; c = getchar(); }
+    while(isdigit(c)) { x = x * 10 + c - '0'; c = getchar(); }
+    if(c != '.') return x * f;
+    c=getchar();
+    while(isdigit(c)) { x += (y /= 10) * (c - '0'); c = getchar(); }
+    return x * f;
+}</code></pre>
+                <p>注意第五行不能省去，因为如果给出一组这样的数据：<code>1 2</code>，会被读成<code>1.2</code></p>
+                <h2 id="输出优化">输出优化：</h2>
+                <p style="color: red;">警告：这里可能是负优化！</p>
+                <p>原理：同样，putchar比其他函数更快</p>
+                <p>代码：</p>
+                <pre><code class="cpp">void write(int x)
+{
+    if(x&lt;0) putchar('-'),x=-x;
+    if(x&gt;9) write(x/10);
+    putchar(x%10+'0');
+}</code></pre>
+                <p>这个是用递归实现的。流程大概如下：</p>
+                <ul>
+                    <li>有一个数1234需要输出：</li>
+                    <li>目前的范围：[1234]</li>
+                    <li>下一层调用：[123]4</li>
+                    <li>下一层调用：[12]34</li>
+                    <li>下一层调用：[1]234，此时的x=1，已经小于9了，所以输出'1'</li>
+                    <li>返回上一层：输出'2'</li>
+                    <li>以此类推，输出'3'，'4'，合起来就是1234了，输出完毕</li>
+                </ul>
+                <p>输出实数太毒瘤了，所以这里就不写了</p>
+                <h2 id="对拍">对拍</h2>
+                <p>在OI中，我们常常需要将正解和暴力优势互补，暴力慢，正解的正确性有时懒得证，于是我们干脆直接将它们对比。</p>
+<p>但是</p>
+<p>一组一组手敲数据真的慢，还不一定查得出来</p>
+<p>所以，我们就需要<strong>对拍</strong></p>
+<p>对拍四要素：</p>
+<ul>
+<li>正解</li>
+<li>暴力</li>
+<li>数据生成器</li>
+<li><strong>对拍器</strong></li>
+
+</ul>
+<p>正解、暴力根据题目。</p>
+<p>数据生成器：根据题目要求随机生成数据。但是可能造不出HACK数据</p>
+<p>对拍器：将两个程序对比的机器。它的流程为：</p>
+<ul>
+<li>生成一组数据</li>
+<li>正解、暴力算结果</li>
+<li>对比，判断是否一样</li>
+<li>重复执行以上过程直到出错</li>
+
+</ul>
+<p>这就要依靠&lt;windows.h&gt;库中的system()函数。</p>
+<p>代码：</p>
+<pre><code lang='cpp'>#include&lt;iostream&gt;
+#include&lt;windows.h&gt;
+using namespace std;
+int main()
+{
+    while(1)
+    {
+        system(&quot;数据生成器.exe &gt; data.txt&quot;);
+        system(&quot;正解.exe &lt; data.txt &gt; yours.txt&quot;);
+        system(&quot;暴力.exe &lt; data.txt &gt; expected.txt&quot;);
+        if(system(&quot;fc expected.txt yours.txt&quot;))   break;
+    }
+    cout&lt;&lt;&quot;发现错误，请查看！&quot;&lt;&lt;endl;
+    system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre>
+<p>例如我们要检查\(\text{BigInt A+B}\)的正确性。</p>
+<p>数据生成器：</p>
+<pre><code class='language-cpp' lang='cpp'>#include&lt;iostream&gt;
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main()
+{
+	srand(time(NULL));
+	int a=rand();
+	int b=rand();
+	cout&lt;&lt;(int)a&lt;&lt;&quot; &quot;&lt;&lt;(int)b;
+}
+</code></pre>
+<p>两个程序：</p>
+<pre><code class='language-cpp' lang='cpp'>#include&lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+	int a,b;
+	cin&gt;&gt;a&gt;&gt;b;
+	cout&lt;&lt;a+b&lt;&lt;endl;
+}
+</code></pre>
+<pre><code class='language-cpp' lang='cpp'>大整数程序略</code></pre>
+<p>对拍器：</p>
+<pre><code class='language-cpp' lang='cpp'>#include&lt;iostream&gt;
+#include&lt;windows.h&gt;
+using namespace std;
+int main()
+{
+	int T=0;
+    while(1)
+    {
+    	T++;
+    	cout&lt;&lt;&quot;testdata&lt;&quot;&lt;&lt;T&lt;&lt;&quot;&gt;&quot;&lt;&lt;endl;
+        system(&quot;datamaker.exe &gt; data.txt&quot;);
+        system(&quot;A+B.exe &lt; data.txt &gt; yours.txt&quot;);
+        system(&quot;A+B_1.exe &lt; data.txt &gt; expected.txt&quot;);
+        if(system(&quot;fc expected.txt yours.txt&quot;)) return 0;
+    }
+    return 0;
+}
+</code></pre>
+<p>如果没有错，运行下来是这样的：</p>
+<p><img src='https://cdn.luogu.org/upload/pic/55966.png' alt='' referrerPolicy='no-referrer' /></p>
+<p>我们把BigInt的输出改为：<code>cout&lt;&lt;a+b+rand()%2;</code></p>
+<p>考验rp的时候到了。</p>
+<p><img src='https://cdn.luogu.org/upload/pic/55969.png' alt='' referrerPolicy='no-referrer' /></p>
+<p>事实证明我还是太非了，才五组就挂了。</p>
+                <h2 id="如何卡常">如何卡常</h2>
+                <p>答：“我不会。”</p>
+                <p>这部分有待补充</p>
+            </div>
+        </div>
+    </div>
+    <!--底边栏-->
+    <div id="footbar">
+        <div id="left">
+            <img src="https://s2.ax1x.com/2020/01/13/lHmkJx.png" id="logo">
+            <div id="intro">异常OI</div>
+        </div>
+        <div id="right">
+            <a href="../intro/about.html">关于本站</a> | <a href="../intro/faq.html">使用帮助</a><br>
+            <a href="../intro/friends.html">友情链接</a> | <a href="../intro/thanks.html">特别感谢</a><br>
+            2020 , © 异常OI Developed by csp-yc Dev Team
+        </div>
+    </div>
+    <!--返回顶部按钮-->
+    <div class="mdui-fab-wrapper" id="back">
+        <a class="mdui-fab mdui-ripple mdui-color-white" href="#">
+            <i class="mdui-icon material-icons">keyboard_arrow_up</i>
+        </a>
+    </div>
+	<script src="https://highlightjs.org/static/highlight.site.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script src="https://highlightjs.org/static/highlight.site.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</body>
+
+</html>

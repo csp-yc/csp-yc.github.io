@@ -36,12 +36,12 @@ function write_sidebar() {
 
 function write_headbar() {
     document.write('<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide" style="background-color: white;">\
-        <div class="mdui-toolbar mdui-color-theme">\
+        <div class="mdui-toolbar mdui-color-white">\
             <a href="../../index.html" class="mdui-typo-title"><img src="https://s2.ax1x.com/2019/12/22/QxY8MR.png" height="25px" style="margin-bottom: -5px"> 异常OI</a>\
             <div class="mdui-toolbar-spacer"></div>\
             <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>\
         </div>\
-        <div class="mdui-tab mdui-color-theme">\
+        <div class="mdui-tab mdui-color-white">\
             <a href="../../index.html" class="mdui-ripple mdui-ripple-white mdui-tab-active">首页</a>\
             <a href="#" class="mdui-ripple mdui-ripple-white">语言基础</a>\
             <a href="#" class="mdui-ripple mdui-ripple-white">基础算法</a>\

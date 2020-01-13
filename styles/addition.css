@@ -2,6 +2,10 @@ html {
     scroll-behavior: smooth;
 }
 
+.mdui-container-fluid {
+    min-height: 60%;
+}
+
 #sidebar a {
     color: rgba(30, 30, 30, 0.7);
     text-decoration: none;
@@ -22,4 +26,45 @@ html {
 #sidebar .sidebar-item {
     margin-bottom: 10px;
     line-height: 15px;
+}
+
+#footbar {
+    width: 100%;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0.895);
+}
+
+#footbar #left {
+    width: 25%;
+    text-align: center;
+    color: #efefef;
+    float: left;
+}
+
+#footbar #left #logo {
+    position: relative;
+    top: 25px;
+    height: 100px;
+    left: 100px;
+}
+
+#footbar #left #intro {
+    position: relative;
+    top: -35px;
+    left: 200px;
+    font-size: 25px;
+}
+
+#footbar #right {
+    width: 50%;
+    text-align: right;
+    padding-top: 50px;
+    padding-right: 20px;
+    color: #aaaaaa !important;
+    float: right;
+}
+
+#footbar #right a {
+    color: #aaaaaa !important;
+    text-decoration: none;
 }
