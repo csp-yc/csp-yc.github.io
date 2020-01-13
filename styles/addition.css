@@ -15,12 +15,11 @@ html {
 }
 
 #sidebar .sidebar-title {
-    border-bottom: 1px solid black;
+    margin-bottom: 10px;
     font-weight: bold;
-    padding-left: 15px;
-    margin-bottom: 5px;
 }
 
 #sidebar .sidebar-item {
-    margin-bottom: 2px;
+    margin-bottom: 10px;
+    line-height: 15px;
 }
