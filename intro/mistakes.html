@@ -14,7 +14,7 @@
     <script src="../scripts/window-onload.js"></script>
     <script src="../scripts/common.js"></script>
 </head>
-<body> 
+<body class="mdui-theme-accent-indigo"> 
     <!--这里是顶栏-->
     <!--页面主要部分，包括侧边栏和主要容器-->
     <div id="main" class="mdui-container-fluid" style="margin-top: 150px; margin-bottom: 100px;">
@@ -33,31 +33,35 @@
         </div>
         <!--主要容器-->
         <div class="mdui-col-md-8">
-            <div id="article">
+            <div id="article" class="mdui-typo">
                 <h1>常见错误</h1>
                 <p>本页面记载一些 OIer 常犯的错误（有待完善）</p>
                 <p>以下资料部分摘自 SocialZxy 的文章<a href="https://socialzxy.github.io/articles/exp-zero.html">《论如何在复赛中爆零》</a></p>
                 <p>注释表示没写</p>
                 <h2>梗（可能只是供嘲笑）</h2>
-                <p><pre><code>int mian()</code></pre></p>
-                <p><pre><code>//freopen("xxx.in", "r", stdin);
-//freopen("xxx.out", "w", stdout);</code></pre></p>
-<p>32位：<pre><code>int a; printf("%lld", a); //LYC大佬亲身尝试</code></pre></p>
+                <ul class="multi-list">
+                    <li><pre><code>int mian()</code></pre></li>
+                    <li><pre><code>//freopen("xxx.in", "r", stdin);
+//freopen("xxx.out", "w", stdout);</code></pre></li>
+                    <li>32位：<pre><code>int a; printf("%lld", a); //LYC大佬亲身尝试</code></pre></li>
+                </ul>
                 <h2>经验（正经总结）</h2>
-                <p><pre><code>#define int long long
-int main()</code></pre>顺便说一句，这不是什么好习惯，建议自己手动开LL</p>
-                <p><pre><code>long long x = (1 << 63); 
-printf("%d", x);</code></pre></p>
-                <p>环境：linux<pre><code>//return 0;</code></pre></p>
-                <p><pre><code>//#include&lt;cstring&gt;
-memset(s, 0, sizeof(s));</code></pre></p>
-                <p><pre><code>double dis[N][N];
-memset(dis, 0x3f, sizeof(dis));</code></pre></p>
-                <p>数据范围1e9<pre><code>int ans;</code></pre></p>
-                <p>二分图匹配——匈牙利算法<pre><code>if(!bel[v] || dfs(v))</code></pre></p>
-                <p>树状数组<pre><code>int query(int u) { int res/* = 0*/; while(u) res += num[u], u -= lowbit(u); return res; }</code></pre>（另外不只是BIT，所有的题不赋初值都得爆零）</p>
-                <p>对double型进行memset</p>
-                <p>cin和scanf混着用</p>
+                <ul class="multi-list">
+                    <li><pre><code>#define int long long
+int main()</code></pre>顺便说一句，这不是什么好习惯，建议自己手动开LL</li>
+                    <li><pre><code>long long x = (1 << 63); 
+printf("%d", x);</code></pre></li>
+                    <li>环境：linux<pre><code>//return 0;</code></pre></li>
+                    <li><pre><code>//#include&lt;cstring&gt;
+memset(s, 0, sizeof(s));</code></pre></li>
+                    <li><pre><code>double dis[N][N];
+memset(dis, 0x3f, sizeof(dis));</code></pre></li>
+                    <li>数据范围1e9<pre><code>int ans;</code></pre></li>
+                    <li>二分图匹配——匈牙利算法<pre><code>if(!bel[v] || dfs(v))</code></pre></li>
+                    <li>树状数组<pre><code>int query(int u) { int res/* = 0*/; while(u) res += num[u], u -= lowbit(u); return res; }</code></pre><p>（另外不只是BIT，所有的题不赋初值都得爆零）</p></li>
+                    <li><p>对double型进行memset</p></li>
+                    <li><p>cin和scanf混着用</p></li>
+                </ul>
             </div>
         </div>
     </div>

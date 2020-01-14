@@ -36,15 +36,7 @@
 	font-size: 110%;
 	color: #505050;
 	margin-bottom: 5px;
-}
-
-#article a{
-	color: #b01;
-	text-decoration: none; 
-}
-
-#article a:hover{
-	text-decoration: underline; 
+	line-height: 1.2;
 }
 
 #article i{
@@ -79,6 +71,7 @@
 	transition: box-shadow .25s cubic-bezier(.4,0,.2,1),-webkit-box-shadow .25s cubic-bezier(.4,0,.2,1);
 	font-family: consolas;
 	padding: 10px;
+	margin-top: 10px;
 	display: block;
 	overflow-x: auto;
 	padding: 0.5em;

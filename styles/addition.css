@@ -81,3 +81,22 @@ html {
     color: #aaaaaa !important;
     text-decoration: none;
 }
+
+.multi-list {
+    padding-inline-start: 0 !important;
+    list-style: none !important;
+}
+
+.multi-list li {
+    border-left: #3f51b5 5px solid;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-left: 10px;
+    margin-left: -10px;
+}
+
+.multi-list pre {
+    border: none;
+    overflow: visible;
+    padding: 0;
+}
