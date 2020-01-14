@@ -6,6 +6,12 @@ html {
     min-height: 60%;
 }
 
+@media (min-width: 1024px) {
+.mdui-toolbar {
+    padding-right: 8.333333%;
+}
+}
+
 #sidebar a {
     color: rgba(30, 30, 30, 0.7);
     text-decoration: none;
@@ -26,6 +32,12 @@ html {
 #sidebar .sidebar-item {
     margin-bottom: 10px;
     line-height: 15px;
+}
+
+#sidebar .sidebar-active a {
+    color: #3f51b5;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
 #footbar {

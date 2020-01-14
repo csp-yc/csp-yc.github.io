@@ -9,7 +9,7 @@ function loadHeadbar() {
             <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
         </div>
         <div class="mdui-tab" mdui-tab>
-            <a href="#" class="mdui-ripple mdui-ripple-white mdui-tab-active mdui-col-offset-md-1" onclick="window.location.href='../index.html'">首页</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white mdui-tab-active mdui-col-offset-md-1" onclick="window.location.href='../index.html'">简介</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">基础算法</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">动态规划</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">数据结构</a>
@@ -39,9 +39,29 @@ function loadFootbar() {
     </div>`;
 }
 
+function loadFab() {
+    let fab = document.createElement('div');
+    document.body.append(fab);
+    fab.outerHTML = 
+    `<div class="mdui-fab-wrapper" id="back">
+        <a class="mdui-fab mdui-ripple mdui-color-white" href="javascript:scrollTo(window);">
+            <i class="mdui-icon material-icons">keyboard_arrow_up</i>
+        </a>
+    </div>`;
+}
+
+function loadHljs() {
+    let script = document.createElement('script');
+    script.src = 'https://highlightjs.org/static/highlight.site.pack.js';
+    document.body.append(script);
+    script.addEventListener('load', function() { hljs.initHighlighting(); }, false);
+}
+
 function loadAll() {
     loadHeadbar();
     loadFootbar();
+    loadFab();
+    loadHljs();
     mdui.mutation();
 }
 
