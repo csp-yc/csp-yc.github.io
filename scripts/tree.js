@@ -33,7 +33,3 @@ var tree = {
         tree.initIcon();
     }
 };
-
-(function() {
-    window.addEventListener('load', tree.mutation, false);
-})();

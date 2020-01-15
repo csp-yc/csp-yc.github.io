@@ -44,7 +44,7 @@ function loadFab() {
     document.body.append(fab);
     fab.outerHTML = 
     `<div class="mdui-fab-wrapper" id="back">
-        <a class="mdui-fab mdui-ripple mdui-color-white" href="javascript:scrollTo(window);">
+        <a class="mdui-fab mdui-ripple mdui-color-white" href="javascript:scrollTo(0, 0);">
             <i class="mdui-icon material-icons">keyboard_arrow_up</i>
         </a>
     </div>`;
@@ -63,6 +63,7 @@ function loadAll() {
     loadFab();
     loadHljs();
     mdui.mutation();
+    tree.mutation();
 }
 
 (function() {

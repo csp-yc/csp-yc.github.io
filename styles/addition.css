@@ -10,6 +10,18 @@ html {
     color: #536dfe !important;
 }
 
+.mdui-tab .mdui-tab-indicator {
+    background-color: #536dfe !important;
+}
+
+.mdui-tab a {
+    transition: .3s;
+}
+
+.mdui-tab a:hover {
+    opacity: 1;
+}
+
 @media (min-width: 1024px) {
 .mdui-toolbar {
     padding-right: 8.333333%;
@@ -23,7 +35,7 @@ html {
 }
 
 #sidebar a:hover {
-    color: rgba(30, 30, 30, 1);
+    color: #3f51b5;
     text-decoration: none;
     transition: 0.3s;
 }
