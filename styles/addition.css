@@ -6,6 +6,10 @@ html {
     min-height: 60%;
 }
 
+.mdui-tab .mdui-tab-active {
+    color: #536dfe !important;
+}
+
 @media (min-width: 1024px) {
 .mdui-toolbar {
     padding-right: 8.333333%;
@@ -35,7 +39,7 @@ html {
 }
 
 #sidebar .sidebar-active a {
-    color: #3f51b5;
+    color: #536dfe;
     text-decoration: none;
     transition: 0.3s;
 }
@@ -88,7 +92,7 @@ html {
 }
 
 .multi-list li {
-    border-left: #3f51b5 5px solid;
+    border-left: #536dfe 5px solid;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     padding-left: 10px;
@@ -99,4 +103,53 @@ pre {
     border: none !important;
     overflow: visible !important;
     padding: 0 !important;
+}
+
+.tree {
+    margin-left: -15px;
+}
+
+.tree .tree-title {
+    font-size: 110%;
+    line-height: 2;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.tree .tree-item {
+    max-height: 20px;
+    overflow: hidden;
+    display: block;
+    padding-left: 15px;
+    transition: .3s;
+}
+
+.tree .tree-item.tree-active {
+    color: #536dfe;
+}
+
+.tree .check {
+    position: absolute;
+    clip: rect(0 0 0 0);
+}
+
+.tree .check:checked + .tree-item {
+    max-height: 30%;
+}
+
+.tree .tree-item .mdui-icon {
+    font-size: 24px !important;
+    cursor: pointer;
+    text-indent: 0 !important;
+    transition: .3s;
+}
+
+.tree .tree-item.tree-leaf .mdui-icon {
+    opacity: 0;
+    margin-right: 4px !important;
+    cursor: default;
+}
+
+.tree .check:checked + .tree-item > .mdui-icon {
+    transform: rotate(180deg);
 }
