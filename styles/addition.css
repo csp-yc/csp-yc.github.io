@@ -95,8 +95,8 @@ html {
     margin-left: -10px;
 }
 
-.multi-list pre {
-    border: none;
-    overflow: visible;
-    padding: 0;
+pre {
+    border: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
 }
