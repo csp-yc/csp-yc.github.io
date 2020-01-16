@@ -58,7 +58,7 @@ html {
 
 #footbar {
     width: 100%;
-    height: 150px;
+    height: 170px;
     background-color: rgba(0, 0, 0, 0.895);
 }
 
@@ -91,11 +91,32 @@ html {
     color: #aaaaaa !important;
     float: right;
     margin-right: 100px;
+    line-height: 17.25px;
 }
 
 #footbar #right a {
     color: #aaaaaa !important;
     text-decoration: none;
+    transition: .3s;
+}
+
+#footbar #right a:hover {
+    color: #eeeeee !important;
+    text-decoration: none;
+}
+
+#footbar #right a::before {
+    background-color: #eeeeee;
+}
+
+@media (max-width: 1024px) {
+#footbar #right a:hover {
+    color: rgba(30, 30, 30, 0.7) !important;
+}
+
+#footbar #right a::before {
+    background-color: rgba(30, 30, 30, 0.7);
+}
 }
 
 .multi-list {

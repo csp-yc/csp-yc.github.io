@@ -3,6 +3,7 @@ var tree = {
     initSerial: function() {
         let trees = document.getElementsByClassName('tree');
         for (let i = 0; i < trees.length; i ++) {
+            if (trees[i].classList.contains('tree-mutated')) continue;
             let items = trees[i].getElementsByClassName('tree-item');
             for (let j = 0; j < items.length; j ++) {
                 if (items[j].getElementsByClassName('tree-item').length != 0) {
@@ -13,12 +14,14 @@ var tree = {
                     items[j].setAttribute('for', 'check-' + tree.max_serial);
                 }
             }
+            trees[i].classList.add('tree-mutated');
         }
     },
     initIcon: function() {
         let trees = document.getElementsByClassName('tree');
         tree.max_serial = 0;
         for (let i = 0; i < trees.length; i ++) {
+            if (trees[i].classList.contains('tree-mutated')) continue;
             let items = trees[i].getElementsByClassName('tree-item');
             for (let j = 0; j < items.length; j ++) {
                 if (items[j].getElementsByClassName('tree-item').length == 0) items[j].classList.add('tree-leaf');
