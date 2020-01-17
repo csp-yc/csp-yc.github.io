@@ -142,10 +142,14 @@ pre {
     margin-left: -15px;
 }
 
+.tree a {
+    cursor: pointer;
+}
+
 .tree .tree-title {
     font-size: 110%;
     line-height: 2;
-    margin-left: 20px;
+    margin-left: 40px;
     font-weight: bold;
 }
 
@@ -155,10 +159,11 @@ pre {
     display: block;
     padding-left: 15px;
     transition: .3s;
+    line-height: 17.25px;
 }
 
-.tree .tree-item.tree-active {
-    color: #536dfe;
+.tree .tree-item.tree-active a {
+    color: #536dfe !important;
 }
 
 .tree .check {
@@ -179,7 +184,7 @@ pre {
 
 .tree .tree-item.tree-leaf .mdui-icon {
     opacity: 0;
-    margin-right: 4px !important;
+    margin-right: 1px !important;
     cursor: default;
 }
 

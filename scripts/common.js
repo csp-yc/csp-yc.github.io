@@ -20,6 +20,10 @@ function updateScrollTop() {
     }
 }
 
+function gotoPart(title) {
+    window.location.href = '../' + title + '/' + article[title].children[0].path;
+}
+
 (function() {
     window.addEventListener('load', function() {
         updateScrollTop();

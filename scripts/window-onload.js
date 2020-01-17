@@ -9,10 +9,10 @@ function loadHeadbar() {
             <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
         </div>
         <div class="mdui-tab" mdui-tab>
-            <a href="#" class="mdui-ripple mdui-ripple-white mdui-tab-active mdui-col-offset-md-1" onclick="window.location.href='../index.html'">简介</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white mdui-col-offset-md-1" onclick="gotoPart('intro')" intro>简介</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">基础算法</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">动态规划</a>
-            <a href="#" class="mdui-ripple mdui-ripple-white">数据结构</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white" onclick="gotoPart('ds')" ds>数据结构</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">数学</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">图论</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">计算几何</a>
@@ -31,12 +31,24 @@ function loadFootbar() {
             <img src="https://s2.ax1x.com/2020/01/13/lHmkJx.png" id="logo">
             <div id="intro">异常OI</div>
         </div>
-        <div id="right">
-            <a href="../intro/about.html">关于本站</a> | <a href="../intro/faq.html">使用帮助</a><br>
-            <a href="../intro/friends.html">友情链接</a> | <a href="../intro/thanks.html">特别感谢</a><br>
-            2020 , © 异常OI Developed by csp-yc Dev Team
+        <div id="right" class="mdui-typo">
+            <a href="intro/about.html">关于本站</a> | <a href="intro/faq.html">使用帮助</a><br>
+            <a href="intro/friends.html">友情链接</a> | <a href="intro/thanks.html">特别感谢</a><br>
+            异常OI | Copyright © 2020<br>
+            Developed by <a href="https://github.com/csp-yc" target="_blank">CSP-YC Dev Team</a> | Published on <a href="https://github.com/csp-yc/csp-yc.github.io" target="_blank">GitHub</a>
         </div>
     </div>`;
+}
+
+function loadTree() {
+    let path = window.location.href.split('/').slice(-2)[0];
+    tree.createTree(article[path], '#sidebar .tree');
+}
+
+function loadTab() {
+    let path = window.location.href.split('/').slice(-2)[0];
+    let tab = document.querySelector('.mdui-tab a[' + path + ']');
+    tab.classList.add('mdui-tab-active');
 }
 
 function loadFab() {
@@ -60,10 +72,13 @@ function loadHljs() {
 function loadAll() {
     loadHeadbar();
     loadFootbar();
+    loadTree();
+    loadTab();
     loadFab();
     loadHljs();
     mdui.mutation();
     tree.mutation();
+    tree.expandItem(window.location.href.split('/').slice(-2).join('/').split('#')[0]);
 }
 
 (function() {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>首页 - 异常OI</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/atom-one-dark.css">
+    <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/atom-one-dark.css">
     <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles/article-style.css">
     <script src="scripts/common.js"></script>
     <script src="scripts/tree.js"></script>
+    <script src="scripts/article-list.js"></script>
 </head>
 <body class="mdui-theme-accent-indigo">
     <!--这里是顶栏-->
@@ -23,10 +24,10 @@
             <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
         </div>
         <div class="mdui-tab" mdui-tab>
-            <a href="#" class="mdui-ripple mdui-ripple-white mdui-tab-active mdui-col-offset-md-1">简介</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white mdui-tab-active mdui-col-offset-md-1" onclick="window.location.href='intro/about.html'" intro>简介</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">基础算法</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">动态规划</a>
-            <a href="#" class="mdui-ripple mdui-ripple-white">数据结构</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white" onclick="window.location.href='ds/intro.html'" ds>数据结构</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">数学</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">图论</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">计算几何</a>
@@ -38,16 +39,18 @@
     <div id="main" class="mdui-container-fluid" style="margin-top: 150px; margin-bottom: 100px;">
         <!--这里是侧边栏-->
         <div class="mdui-col-md-2 mdui-col-offset-md-1" id="sidebar">
-            <div class="sidebar-title">简介</div>
-            <div class="sidebar-item"><a href="./intro/about.html">关于本站</a></div>
-            <div class="sidebar-item"><a href="./intro/oi.html">OI 赛制与赛事</a></div>
-            <div class="sidebar-item"><a href="./intro/resources.html">学习资源</a></div>
-            <div class="sidebar-item"><a href="./intro/mistakes.html">常见错误</a></div>
-            <div class="sidebar-item"><a href="./intro/tricks.html">常见技巧</a></div>
-            <div class="sidebar-item"><a href="./intro/contribute.html">如何参与</a></div>
-            <div class="sidebar-item"><a href="./intro/friends.html">友情链接</a></div>
-            <div class="sidebar-item"><a href="./intro/thanks.html">特别感谢</a></div>
-            <div class="sidebar-item"><a href="./intro/faq.html">F.A.Q.</a></div>
+            <div class="tree">
+                <div class="tree-title">简介</div>
+                <label class="tree-item"><a href="intro/about.html">关于本站</a></label>
+                <label class="tree-item"><a href="intro/oi.html">OI 赛制与赛事</a></label>
+                <label class="tree-item"><a href="intro/resources.html">学习资源</a></label>
+                <label class="tree-item"><a href="intro/mistakes.html">常见错误</a></label>
+                <label class="tree-item"><a href="intro/tricks.html">常见技巧</a></label>
+                <label class="tree-item"><a href="intro/contribute.html">如何参与</a></label>
+                <label class="tree-item"><a href="intro/friends.html">友情链接</a></label>
+                <label class="tree-item"><a href="intro/thanks.html">特别感谢</a></label>
+                <label class="tree-item"><a href="intro/faq.html">F.A.Q.</a></label>
+            </div>
         </div>
         <!--主要容器-->
         <div class="mdui-col-md-8">
@@ -71,7 +74,7 @@
             <a href="intro/about.html">关于本站</a> | <a href="intro/faq.html">使用帮助</a><br>
             <a href="intro/friends.html">友情链接</a> | <a href="intro/thanks.html">特别感谢</a><br>
             异常OI | Copyright © 2020<br>
-            Developed by <a href="https://github.com/csp-yc">CSP-YC Dev Team</a> | Published on <a href="https://github.com/csp-yc/csp-yc.github.io">GitHub</a>
+            Developed by <a href="https://github.com/csp-yc" target="_blank">CSP-YC Dev Team</a> | Published on <a href="https://github.com/csp-yc/csp-yc.github.io" target="_blank">GitHub</a>
         </div>
     </div>
     <!--返回顶部按钮-->
@@ -80,6 +83,11 @@
             <i class="mdui-icon material-icons">keyboard_arrow_up</i>
         </a>
     </div>
+    <script>
+        window.addEventListener('load', function() {
+            tree.mutation();
+        }, false);
+    </script>
 </body>
 
 </html>

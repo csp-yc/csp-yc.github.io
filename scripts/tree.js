@@ -14,7 +14,6 @@ var tree = {
                     items[j].setAttribute('for', 'check-' + tree.max_serial);
                 }
             }
-            trees[i].classList.add('tree-mutated');
         }
     },
     initIcon: function() {
@@ -28,6 +27,47 @@ var tree = {
                 let icon = document.createElement('i');
                 items[j].prepend(icon);
                 icon.outerHTML = '<i class="mdui-icon material-icons">keyboard_arrow_down</i>';
+            }
+        }
+    },
+    createTreeNode: function(data, link) {
+        let str = 
+        '<label class="tree-item">' +
+            '<a' + (data.path && data.path.indexOf('.html') != -1 ? ' href=\"' + link + '/' + data.path + '\"' : '') + '>' + data.title + '</a>';
+            if (data.children) {
+                for (let i = 0; i < data.children.length; i ++) {
+                    str += tree.createTreeNode(data.children[i], link + (data.path ? '/' + data.path : ''));
+                }
+            }
+        str += 
+        '</label>';
+        return str;
+    },
+    createTree: function(data, selector) {
+        let str = 
+        '<div class="tree">' +
+            '<div class="tree-title">' + data.title + '</div>';
+            if (data.children) {
+                for (let i = 0; i < data.children.length; i ++) {
+                    str += tree.createTreeNode(data.children[i], '../' + data.path);
+                }
+            }
+        str += 
+        '</div>';
+        if (!selector) return str;
+        let element = document.querySelector(selector);
+        element.outerHTML = str;
+        return element;
+    },
+    expandItem: function(file) {
+        let links = document.querySelectorAll('.tree a[href="../' + file + '"]');
+        for (let link of links) {
+            link.parentNode.classList.add('tree-active');
+            let label = link.parentNode.parentNode;
+            while (!label.classList.contains('tree')) {
+                let f = label.getAttribute('for');
+                document.getElementById(f).checked = true;
+                label = label.parentNode;
             }
         }
     },

@@ -1,30 +1,33 @@
+#article {
+	margin-bottom: 200px;
+}
+
 #article h1{
-	font-size: 300% ;
+	font-size: 230% ;
 	font-weight: 300;
-	text-align: center;
 }
 
 #article h2{
-	font-size: 200% ;
+	font-size: 180% ;
 	font-weight: 300;
 	color: #101010;
 }
 
 #article h3{
-	font-size: 150% ;
+	font-size: 140% ;
 	font-weight: 300;
 	color: #202020;
 }
 
 #article h4{
-	font-size: 125% ;
+	font-size: 125%;
 	font-weight: 300;
 	color: #303030;
 }
 
 #article p{
 	font-size: 110%;
-	color: #505050;
+	color: #424242;
 	line-height: 24px;
 }
 
@@ -34,14 +37,14 @@
 
 #article ul li {
 	font-size: 110%;
-	color: #505050;
+	color: #424242;
 	margin-bottom: 5px;
 	line-height: 1.2;
 }
 
 #article i{
 	font-size: 110%;
-	color: #505050;
+	color: #424242;
 	text-indent: 20px;
 }
 

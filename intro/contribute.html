@@ -11,18 +11,7 @@
     <!--页面主要部分，包括侧边栏和主要容器-->
     <div id="main" class="mdui-container-fluid" style="margin-top: 150px; margin-bottom: 100px;">
         <!--这里是侧边栏-->
-        <div class="mdui-col-md-2 mdui-col-offset-md-1" id="sidebar">
-            <div class="sidebar-title">简介</div>
-            <div class="sidebar-item"><a href="../intro/about.html">关于本站</a></div>
-            <div class="sidebar-item"><a href="../intro/oi.html">OI 赛制与赛事</a></div>
-            <div class="sidebar-item"><a href="../intro/resources.html">学习资源</a></div>
-            <div class="sidebar-item"><a href="../intro/mistakes.html">常见错误</a></div>
-            <div class="sidebar-item"><a href="../intro/tricks.html">常见技巧</a></div>
-            <div class="sidebar-item sidebar-active"><a href="../intro/contribute.html">如何参与</a></div>
-            <div class="sidebar-item"><a href="../intro/friends.html">友情链接</a></div>
-            <div class="sidebar-item"><a href="../intro/thanks.html">特别感谢</a></div>
-            <div class="sidebar-item"><a href="../intro/faq.html">F.A.Q.</a></div>
-        </div>
+        <div class="mdui-col-md-2 mdui-col-offset-md-1" id="sidebar"><div class="tree"></div></div>
         <!--主要容器-->
         <div class="mdui-col-md-8">
             <div id="article" class="mdui-typo">
@@ -33,6 +22,18 @@
             </div>
         </div>
     </div>
+    <style>
+        #article h1 {
+            font-size: 300%;
+            text-align: center;
+        }
+        #article h2 {
+            font-size: 200%;
+        }
+        #article h3 {
+            font-size: 150%;
+        }
+    </style>
     <!--底边栏-->
     <!--返回顶部按钮-->
 </body>

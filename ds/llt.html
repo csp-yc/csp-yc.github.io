@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>左偏树 - 异常OI</title>
+    <script src="../scripts/import.js"></script>
+</head>
+<body class="mdui-theme-accent-indigo"> 
+    <!--这里是顶栏-->
+    <!--页面主要部分，包括侧边栏和主要容器-->
+    <div id="main" class="mdui-container-fluid" style="margin-top: 150px; margin-bottom: 100px;">
+        <!--这里是侧边栏-->
+        <div class="mdui-col-md-2 mdui-col-offset-md-1" id="sidebar"><div class="tree"></div></div>
+        <!--主要容器-->
+        <div class="mdui-col-md-8">
+            <div id="article" class="mdui-typo">
+                <h1>左偏树</h1>
+                <h2>定义</h2>
+                <ul>
+                    <li>堆</li>
+                    <li>外子节点权值为0 其余点权值为距离子树中外子节点的最短距离</li>
+                    <li>任一点左儿子权值大于等于右儿子权值</li>
+                </ul>
+                <h2>性质</h2>
+                <p>对于任意一个节点，其权值等于其右儿子权加1</p>
+                <h2>用途</h2>
+                <p>可合并堆</p>
+                <h2>具体实现</h2>
+                <h3>合并 \(\lg n\)</h3>
+                <p>判断两棵树的根，谁小，就将另一棵树和它的右子树合并。递归实现。</p>
+                <h3>插入 \(\lg n\)</h3>
+                <p>把原树和那个数（看做一棵树）合并</p>
+                <h3>查询</h3>
+                <p>略</p>
+                <h3>删除</h3>
+                <p>把根节点删去，把左子树和右子树合并</p>
+            </div>
+        </div>
+    </div>
+    <!--底边栏-->
+    <!--返回顶部按钮-->
+</body>
+
+</html>
