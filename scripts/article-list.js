@@ -95,12 +95,49 @@ var article = {
                 "intro": "Heap",
                 "children": [
                     {
+                        "title": "堆简介",
+                        "tags": ["树形结构", "二叉树", "堆"],
+                        "intro": "Heap",
+                        "author": "CSP-YC 团队",
+                        "date": 1578994005000,
+                        "path": "heap.html"
+                    },
+                    {
                         "title": "左偏树",
                         "tags": ["树形结构", "二叉树", "堆", "可并堆"],
-                        "intro": "Left Leaning Tree",
+                        "intro": "Leftist Tree",
                         "author": "dottle",
                         "date": 1578994005000,
-                        "path": "llt.html"
+                        "path": "leftist-tree.html"
+                    }
+                ]
+            }
+        ]
+    },
+    "graph": {
+        "title": "图论",
+        "path": "graph",
+        "children": [
+            {
+                "title": "图论简介",
+                "tags": ["简介"],
+                "intro": "图论板块概述",
+                "author": "CSP-YC 团队",
+                "date": 1578994005000,
+                "path": "intro.html"
+            },
+            {
+                "title": "树上问题",
+                "tags": ["树形结构"],
+                "intro": "Tree",
+                "children": [
+                    {
+                        "title": "树分治",
+                        "tags": ["树形结构", "分治"],
+                        "intro": "Tree Divide",
+                        "author": "dottle",
+                        "date": 1578994005000,
+                        "path": "tree-divide.html"
                     }
                 ]
             }

@@ -10,6 +10,7 @@
     <script src="../scripts/window-onload.js"></script>
     <script src="../scripts/common.js"></script>
     <script src="../scripts/tree.js"></script>
-    <script src="../scripts/article-list.js"></script>`
+    <script src="../scripts/article-list.js"></script>
+    <script src="../scripts/link-list.js"></script>`
     );
 })();

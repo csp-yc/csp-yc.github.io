@@ -21,7 +21,9 @@ function updateScrollTop() {
 }
 
 function gotoPart(title) {
-    window.location.href = '../' + title + '/' + article[title].children[0].path;
+    setTimeout(function() {
+        window.location.href = '../' + title + '/' + article[title].children[0].path;
+    }, 300);
 }
 
 (function() {

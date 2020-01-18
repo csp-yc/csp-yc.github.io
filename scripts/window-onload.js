@@ -14,7 +14,7 @@ function loadHeadbar() {
             <a href="#" class="mdui-ripple mdui-ripple-white">动态规划</a>
             <a href="#" class="mdui-ripple mdui-ripple-white" onclick="gotoPart('ds')" ds>数据结构</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">数学</a>
-            <a href="#" class="mdui-ripple mdui-ripple-white">图论</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white" onclick="gotoPart('graph')" graph>图论</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">计算几何</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">字符串</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">杂项</a>
@@ -51,6 +51,37 @@ function loadTab() {
     tab.classList.add('mdui-tab-active');
 }
 
+function loadInfo() {
+    let path = window.location.href.split('/').slice(-2)[0];
+    let file = window.location.href.split('/').slice(-1)[0];
+    let info = article[path].children.filter(child => child.path == file)[0];
+    if (!info) {
+        for (let i of article[path].children.filter(child => child.children)) {
+            info = i.children.filter(child => child.path == file)[0];
+            if (info) break;
+        }
+    }
+    if (!info) {
+        for (let i of article[path].children.filter(child => child.children)) {
+            for (let j of i.children.filter(child => child.children)) {
+                info = j.children.filter(child => child.path == file)[0];
+                if (info) break;
+            }
+        }
+    }
+    if (!info) return;
+    document.getElementById('article').innerHTML +=
+    `<hr>
+    <div class="info">
+        <div class="info-primary"><div class="info-primary-title">关于本文</div><div class="info-primary-subtitle">Some information about this article.</div></div>
+        <div class="info-content mdui-typo">
+            <div><i class="mdui-icon material-icons">update</i>最后更新日期：` + new Date(info.date).toLocaleString() + `</div>
+            <div><i class="mdui-icon material-icons">person</i>作者：<a href="` + links[info.author] + `" target="_blank">` + info.author + `</a></div>
+            <div><i class="mdui-icon material-icons">edit</i>想参与完善页面？<a href="https://github.com/csp-yc/csp-yc.github.io/issues" target="_blank">提交Issues</a></div>
+        </div>
+    </div>`;
+}
+
 function loadFab() {
     let fab = document.createElement('div');
     document.body.append(fab);
@@ -74,6 +105,7 @@ function loadAll() {
     loadFootbar();
     loadTree();
     loadTab();
+    loadInfo();
     loadFab();
     loadHljs();
     mdui.mutation();
