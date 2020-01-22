@@ -109,6 +109,13 @@ function loadImgOrigin() {
     }
 }
 
+function loadComment() {
+    let articlebar = document.getElementById('article');
+    let script = document.createElement('script');
+    articlebar.append(script);
+    script.outerHTML = '<script src="https://utteranc.es/client.js" repo="csp-yc/csp-yc.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>';
+}
+
 function loadAll() {
     loadHeadbar();
     loadFootbar();
@@ -118,6 +125,7 @@ function loadAll() {
     loadFab();
     loadHljs();
     loadImgOrigin();
+    loadComment();
     mdui.mutation();
     tree.mutation();
     tree.expandItem(window.location.href.split('/').slice(-2).join('/').split('#')[0]);
