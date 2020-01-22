@@ -1,0 +1,164 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分块 - 异常OI</title>
+    <script src="../scripts/import.js"></script>
+</head>
+<body class="mdui-theme-accent-indigo"> 
+    <!--这里是顶栏-->
+    <!--页面主要部分，包括侧边栏和主要容器-->
+    <div id="main" class="mdui-container-fluid" style="margin-top: 150px; margin-bottom: 100px;">
+        <!--这里是侧边栏-->
+        <div class="mdui-col-md-2 mdui-col-offset-md-1" id="sidebar"><div class="tree"></div></div>
+        <!--主要容器-->
+        <div class="mdui-col-md-8">
+            <div id="article" class="mdui-typo">
+<h1>分块</h1>
+<h2>引入</h2>
+<p>这里是一道用烂了的例题。</p>
+<h3>例 1</h3>
+<p>给定一个长度为 n 的序列\((a_1,a_2,a_3,...,a_n)\)，要求支持以下操作：</p>
+<ul>
+<li>将某个点的值加上 x。</li>
+<li>求\(\sum\limits_{i=l}^{r}{a_i}\)，即区间 \([l,r]\) 所有元素之和。</li>
+</ul>
+<p>数据范围：\(n \leq 1000\)，询问次数\(q \leq 1000\)。</p>
+<p>观察数据范围易得，对于每次修改，我们可以通过下标找到要修改的元素；对于每次询问我们可以扫描区间 \([l,r]\) 暴力求和，时间复杂度为 \(O(nq)\)。</p>
+<p>下面我们修正一下数据。</p>
+<h3>例 2</h3>
+<p>题意同上。</p>
+<p>数据范围：\(n,q \leq 10^5\)。</p>
+<p>可以发现，如果使用 \(O(nq)\) 的算法会超时，所以我们需要更优的解决方案，也就是<b>分块</b>。</p>
+<h2>简介</h2>
+<p>分块可以说是一种数据结构，也可以说是一种思想：将需要处理的整个问题分成若干部分，叫<b>块</b>。<b>如果我们要处理的问题包括了一整个块，就整体处理；否则，就将单独的元素单独处理。</b></p>
+<hr>
+<h2>数列分块</h2>
+<p>&nbsp;</p>
+<h3>例 1 P3372 线段树 1</h3>
+<h3>解析</h3>
+<p>我们可以将整个数列分成若干块，设每块大小为\(T\)，则总块数为\(\lceil{\frac{N}{T}}\rceil\)。为了节省常数，我们用一个\(bel\)数组来记录\(i\)属于哪一个块。下文的区间修改，我们使用了<b>标记永久化</b>；并且从0开始存储。</p>
+<p>我们可以看一幅图：</p>
+<p><img src="https://s2.ax1x.com/2020/01/22/1AI5sU.md.png" origin="dottle"></p>
+<p>被我打了三角符号的元素，是它所在块的起点，发现他们的权值都是T的倍数。</p>
+<h4>初始化</h4>
+<p>\(A_i\)表示\(i\)号元素的值，\(B_i\)表示第\(i\)个块中的所有数都加上了\(B_i\)，\(C_i\)表示第\(i\)个块的元素值之和。因此第\(i\)号元素的真实值为\(A_i+B_{bel_i}\)，第\(i\)个块的真实值为\(C_i+T*B_i\)。</p>
+<pre><code class="hljs cpp">for(int i=0;i&lt;n;i++)
+  scanf(&quot;%lld&quot;,&amp;a[i]), bel[i]=i/T, c[bel[i]]+=a[i];
+</code></pre>
+<h4>修改</h4>
+<p>先将零散的元素一个一个修改，再将涉及到的整个块修改。</p>
+<pre><code class="hljs cpp">void add(int x,int y,int z){
+	register int i;
+	for(i=x;i%T&amp;&amp;i&lt;=y;i++)
+    a[i]+=z,c[p]+=z;//处理前半部分的零散元素，如i%T==0了(到达整块)或i&gt;y了(已处理完)则停止。
+	for(;i+T&lt;y;i+=T)
+    b[p]+=z;//处理中间的整块
+	for(;i&lt;=y;i++)
+    a[i]+=z,c[p]+=z;//处理后半部分的零散元素
+}
+</code></pre>
+<h4>查询</h4>
+<p>像修改一样，将零散的元素一个个统计，再将块整体加上。</p>
+<pre><code class="hljs cpp">long long sum(int x,int y){
+	register int ans=0,i;
+	for(i=x;i%T&amp;&amp;i&lt;=y;i++)
+    ans+=a[i]+b[p];//处理前半部分的零散元素
+	for(;i+T&lt;y;i+=T)
+    ans+=c[p]+b[p]*T;//处理中间的整块元素
+	for(;i&lt;=y;i++)
+    ans+=a[i]+b[p];//处理后半部分的零散元素
+	return ans;
+}
+
+</code></pre>
+<h3>复杂度分析</h3>
+<p>对于每次操作，零散操作的次数不会超过\(2T\),整块操作的次数则不会超过\(\lceil{\frac{N}{T}}\rceil\)。故单次查询的复杂度为\(O(T+\lceil{\frac{N}{T}}\rceil)\)</p>
+<p>由<b>均值不等式</b>\(a+b\leq2\sqrt{ab}\)可以得到其最小值为\(\sqrt{ab}=\sqrt{N}\)，当且仅当\(T=\lceil{\frac{N}{T}}\rceil\)，解得\(T=\sqrt{N}\)</p>
+<p>有\(M\)次操作，所以总复杂度就是\(O(M\sqrt{N})\)。大约为\(10^5*10^{2.5}=10^{7.5}\)，可以通过这道题。</p>
+<h3>代码</h3>
+<pre><code class="hljs cpp">#include&lt;bits/stdc++.h&gt;
+#define N 105005
+#define T 350
+#define int long long
+#define p bel[i]
+using namespace std;
+
+int a[N],b[N],c[N],n,x,y,z,o,m,bel[N];
+
+int sum(int x,int y){
+	register int ans=0,i;
+	for(i=x;i%T&amp;&amp;i&lt;=y;i++)
+    ans+=a[i]+b[p];
+	for(;i+T&lt;y;i+=T)
+    ans+=c[p]+b[p]*T;
+	for(;i&lt;=y;i++)
+    ans+=a[i]+b[p];
+	return ans;
+}
+
+void add(int x,int y,int z){
+	register int i;
+	for(i=x;i%T&amp;&amp;i&lt;=y;i++)
+    a[i]+=z,c[p]+=z;
+	for(;i+T&lt;y;i+=T)
+    b[p]+=z;
+	for(;i&lt;=y;i++)
+    a[i]+=z,c[p]+=z;
+}
+
+signed main(){
+	scanf(&quot;%lld%lld&quot;,&amp;n,&amp;m);
+	for(int i=0;i&lt;n;i++)
+    scanf(&quot;%lld&quot;,&amp;a[i]),p=i/T,c[p]+=a[i];
+	while(m--){
+		scanf(&quot;%lld%lld%lld&quot;,&amp;o,&amp;x,&amp;y);
+		if(o-1)printf(&quot;%lld\n&quot;,sum(x-1,y-1));
+		else scanf(&quot;%lld&quot;,&amp;z),add(x-1,y-1,z);
+	}
+	return 0;
+}
+</code></pre>
+<hr>
+<h2>例2 <a href='https://luogu.com.cn/problem/P3203' target="_blank">P3203 弹飞绵羊</a></h2>
+<h3>解析</h3>
+<p>分块的好题，尽管不太容易看出来。</p>
+<p>先想暴力，最直接的方法查询时就是一个一个弹，直到被弹飞；修改时直接修改一个就可以了。这样，查询复杂度为\(O(N)\),修改为\(O(1)\)。还有一种暴力的思路是直接将每个数的情况先预处理好，然后每次查询直接\(O(1)\)输出，但是修改就是\(O(N)\)的了。</p>
+<p>我们发现，暴力的复杂度太高是因为他们他极限了。如果说我们查询时不是一个一个弹，而是几个几个弹，那么查询复杂度就变小了，同时修改的复杂度会变大，但也是我们可以接受的。到这里，<b>分块</b>思想就十分明显了。</p>
+<p>我们用记录\(i\)号节点弹出当前块的步数为\(fly_i\)，弹出块后会到达\(nxt_i\)，\(i\)节点弹力为\(a_i\)。</p>
+<h4>初始化</h4>
+<p>这部分我们先拖一下，先看后面。</p>
+<h4>查询</h4>
+<p>从\(y\)节点开始，每次统计\(ans\)加上\(fly_y\)，然后\(y=nxt_y\)，直到被弹飞。</p>
+<pre><code class="hljs cpp">while(y&lt;n)
+  ans+=fly[y],y=nxt[y];
+printf(&quot;%d\n&quot;,ans);
+</code></pre>
+<h4>修改</h4>
+<p>首先我们修改\(a_y=z\)</p>
+<p>然后需要修改一些点的\(fly\)和\(nxt\)值，哪些点呢？我们排除一下：在\(y\)后面的肯定不用；和\(y\)不在一个块的肯定也不用，因为他们不可能因为\(a_y\)的改变而直接弹到\(y\)的后面(由先前的定义得到)；至于那些与\(y\)在同一个块并且在\(y\)前面的点的\(fly\)，\(nxt\)值就可能随着\(a_i\)的改变变化了。有一张图可以便于你理解。</p>
+<p><img src="https://s2.ax1x.com/2020/01/22/1Ao9dH.md.png" origin="dottle"></p>
+<p>所以我们只需对当前块中在\(y\)之前的元素进行修改</p>
+<pre><code class="hljs cpp">void solve(int l,int r){
+	for(int i=r;i&gt;=l;i--)
+		if(i+a[i]&gt;=n||bel[i]!=bel[i+a[i]])
+			fly[i]=1,nxt[i]=i+a[i];
+		else
+			fly[i]=fly[i+a[i]]+1,nxt[i]=nxt[i+a[i]];
+}
+solve(bel[y]*T,y);
+</code></pre>
+<p>现在可以进行初始化了，因为相当于是修改了所有元素，所以全部修改就可以了</p>
+<h3>初始化</h3>
+<pre><code class="hljs cpp">solve(1,n);
+</code></pre>
+
+            </div>
+        </div>
+    </div>
+    <!--底边栏-->
+    <!--返回顶部按钮-->
+</body>
+
+</html>

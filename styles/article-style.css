@@ -100,6 +100,14 @@
 	font-size: 50%;
 }
 
+#article .utterances {
+	margin-left: 0;
+}
+
+#article .MathJax {
+	outline: none;
+}
+
 .mdui-chip {
 	color: #271b1b !important;
 }

@@ -98,6 +98,14 @@ var article = {
                 "path": "seg.html"
             },
             {
+                "title": "分块",
+                "tags": ["分治"],
+                "intro": "Block Array/List",
+                "author": "dottle",
+                "date": 1579701722000,
+                "path": "block.html"
+            },
+            {
                 "title": "堆",
                 "tags": ["树形结构", "二叉树", "堆"],
                 "intro": "Heap",

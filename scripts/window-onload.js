@@ -77,7 +77,7 @@ function loadInfo() {
         <div class="info-content mdui-typo">
             <div><i class="mdui-icon material-icons">update</i>最后更新日期：` + toLocaleDateString(info.date) + `</div>
             <div><i class="mdui-icon material-icons">person</i>作者：<a href="` + links[info.author] + `" target="_blank">` + info.author + `</a></div>
-            <div><i class="mdui-icon material-icons">edit</i>想参与完善页面？<a href="https://github.com/csp-yc/csp-yc.github.io/issues" target="_blank">提交Issues</a></div>
+            <div><i class="mdui-icon material-icons">edit</i>想参与完善页面？<a href="https://github.com/csp-yc/csp-yc.github.io/issues" target="_blank">提交Issues</a> 或 在下方评论</div>
         </div>
     </div>`;
 }
