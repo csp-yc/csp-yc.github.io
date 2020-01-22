@@ -90,6 +90,14 @@ var article = {
                 "path": "intro.html"
             },
             {
+                "title": "线段树",
+                "tags": ["树形结构", "二叉树"],
+                "intro": "Segment Tree",
+                "author": "CSP-YC 团队",
+                "date": 1579689823000,
+                "path": "seg.html"
+            },
+            {
                 "title": "堆",
                 "tags": ["树形结构", "二叉树", "堆"],
                 "intro": "Heap",

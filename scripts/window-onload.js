@@ -75,7 +75,7 @@ function loadInfo() {
     <div class="info">
         <div class="info-primary"><div class="info-primary-title">关于本文</div><div class="info-primary-subtitle">Some information about this article.</div></div>
         <div class="info-content mdui-typo">
-            <div><i class="mdui-icon material-icons">update</i>最后更新日期：` + new Date(info.date).toLocaleString() + `</div>
+            <div><i class="mdui-icon material-icons">update</i>最后更新日期：` + toLocaleDateString(info.date) + `</div>
             <div><i class="mdui-icon material-icons">person</i>作者：<a href="` + links[info.author] + `" target="_blank">` + info.author + `</a></div>
             <div><i class="mdui-icon material-icons">edit</i>想参与完善页面？<a href="https://github.com/csp-yc/csp-yc.github.io/issues" target="_blank">提交Issues</a></div>
         </div>
@@ -100,6 +100,15 @@ function loadHljs() {
     script.addEventListener('load', function() { hljs.initHighlighting(); }, false);
 }
 
+function loadImgOrigin() {
+    let imgs = document.querySelectorAll('img[origin]');
+    for (let img of imgs) {
+        let text = document.createElement('p');
+        img.after(text);
+        text.outerHTML = `<p class="img-origin">图片来源：${img.getAttribute('origin')}</p>`;
+    }
+}
+
 function loadAll() {
     loadHeadbar();
     loadFootbar();
@@ -108,6 +117,7 @@ function loadAll() {
     loadInfo();
     loadFab();
     loadHljs();
+    loadImgOrigin();
     mdui.mutation();
     tree.mutation();
     tree.expandItem(window.location.href.split('/').slice(-2).join('/').split('#')[0]);

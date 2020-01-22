@@ -21,25 +21,25 @@
                 <p>注释表示没写</p>
                 <h2>梗（可能只是供嘲笑）</h2>
                 <ul class="multi-list">
-                    <li><pre><code>int mian()</code></pre></li>
-                    <li><pre><code>//freopen("xxx.in", "r", stdin);
+                    <li><pre><code class="hljs cpp">int mian()</code></pre></li>
+                    <li><pre><code class="hljs cpp">//freopen("xxx.in", "r", stdin);
 //freopen("xxx.out", "w", stdout);</code></pre></li>
-                    <li>32位：<pre><code>int a; printf("%lld", a); //LYC大佬亲身尝试</code></pre></li>
+                    <li>32位：<pre><code class="hljs cpp">int a; printf("%lld", a); //LYC大佬亲身尝试</code></pre></li>
                 </ul>
                 <h2>经验（正经总结）</h2>
                 <ul class="multi-list">
-                    <li><pre><code>#define int long long
+                    <li><pre><code class="hljs cpp">#define int long long
 int main()</code></pre>顺便说一句，这不是什么好习惯，建议自己手动开LL</li>
-                    <li><pre><code>long long x = (1 << 63); 
+                    <li><pre><code class="hljs cpp">long long x = (1 << 63); 
 printf("%d", x);</code></pre></li>
-                    <li>环境：linux<pre><code>//return 0;</code></pre></li>
-                    <li><pre><code>//#include&lt;cstring&gt;
+                    <li>环境：linux<pre><code class="hljs cpp">//return 0;</code></pre></li>
+                    <li><pre><code class="hljs cpp">//#include&lt;cstring&gt;
 memset(s, 0, sizeof(s));</code></pre></li>
-                    <li><pre><code>double dis[N][N];
+                    <li><pre><code class="hljs cpp">double dis[N][N];
 memset(dis, 0x3f, sizeof(dis));</code></pre></li>
-                    <li>数据范围1e9<pre><code>int ans;</code></pre></li>
-                    <li>二分图匹配——匈牙利算法<pre><code>if(!bel[v] || dfs(v))</code></pre></li>
-                    <li>树状数组<pre><code>int query(int u) { int res/* = 0*/; while(u) res += num[u], u -= lowbit(u); return res; }</code></pre><p>（另外不只是BIT，所有的题不赋初值都得爆零）</p></li>
+                    <li>数据范围1e9<pre><code class="hljs cpp">int ans;</code></pre></li>
+                    <li>二分图匹配——匈牙利算法<pre><code class="hljs cpp">if(!bel[v] || dfs(v))</code></pre></li>
+                    <li>树状数组<pre><code class="hljs cpp">int query(int u) { int res/* = 0*/; while(u) res += num[u], u -= lowbit(u); return res; }</code></pre><p>（另外不只是BIT，所有的题不赋初值都得爆零）</p></li>
                     <li><p>对double型进行memset</p></li>
                     <li><p>cin和scanf混着用</p></li>
                 </ul>

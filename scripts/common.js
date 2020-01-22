@@ -26,6 +26,11 @@ function gotoPart(title) {
     }, 300);
 }
 
+function toLocaleDateString(number) {
+    let date = new Date(number);
+    return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+}
+
 (function() {
     window.addEventListener('load', function() {
         updateScrollTop();

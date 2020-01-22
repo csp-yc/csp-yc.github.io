@@ -95,6 +95,11 @@
 	margin-right: 5px;
 }
 
+#article .img-origin {
+	color: gray;
+	font-size: 50%;
+}
+
 .mdui-chip {
 	color: #271b1b !important;
 }
