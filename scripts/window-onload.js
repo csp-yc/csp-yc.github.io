@@ -112,8 +112,13 @@ function loadImgOrigin() {
 function loadComment() {
     let articlebar = document.getElementById('article');
     let script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'csp-yc/csp-yc.github.io');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.crossOrigin = 'anonymous';
+    script.async = true;
     articlebar.append(script);
-    script.outerHTML = '<script src="https://utteranc.es/client.js" repo="csp-yc/csp-yc.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>';
 }
 
 function loadAll() {
