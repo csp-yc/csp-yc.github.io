@@ -28,8 +28,17 @@ html {
 }
 }
 
+#sidebar {
+    position: fixed;
+    transition: all .3s cubic-bezier(.4,0,.2,1) !important;
+}
+
+.mdui-headroom-unpinned-toolbar + #main #sidebar {
+    transform: translate3d(0, -64px, 0);
+}
+
 #sidebar a {
-    color: rgba(30, 30, 30, 0.7);
+    color: rgba(30, 30, 30, 0.8);
     text-decoration: none;
     transition: 0.3s;
 }
@@ -144,10 +153,11 @@ pre {
 
 .tree a {
     cursor: pointer;
+    font-size: 16px;
 }
 
 .tree .tree-title {
-    font-size: 110%;
+    font-size: 120%;
     line-height: 2;
     margin-left: 40px;
     font-weight: bold;
@@ -158,8 +168,9 @@ pre {
     overflow: hidden;
     display: block;
     padding-left: 15px;
-    transition: .3s;
+    transition: all .3s cubic-bezier(.4, 0, .2, 1);
     line-height: 17.25px;
+    margin-bottom: 5px;
 }
 
 .tree .tree-item.tree-active a {
