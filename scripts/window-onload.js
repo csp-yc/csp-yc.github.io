@@ -70,13 +70,22 @@ function loadInfo() {
         }
     }
     if (!info) return;
-    document.getElementById('article').innerHTML +=
+    let contributors_link = '';
+    if (info.contributors) {
+        for (contributor of info.contributors) {
+            contributors_link += `、<a href="${links[contributor]}" target="_blank">${contributor}</a>`;
+        }
+    }
+    let articlebar = document.getElementById('article');
+    let infobar = document.createElement('div');
+    articlebar.append(infobar);
+    infobar.outerHTML = 
     `<hr>
     <div class="info">
         <div class="info-primary"><div class="info-primary-title">关于本文</div><div class="info-primary-subtitle">Some information about this article.</div></div>
         <div class="info-content mdui-typo">
-            <div><i class="mdui-icon material-icons">update</i>最后更新日期：` + toLocaleDateString(info.date) + `</div>
-            <div><i class="mdui-icon material-icons">person</i>作者：<a href="` + links[info.author] + `" target="_blank">` + info.author + `</a></div>
+            <div><i class="mdui-icon material-icons">update</i>最后更新日期：${toLocaleDateString(info.date)}</div>
+            <div><i class="mdui-icon material-icons">person</i>${info.contributors?'贡献者':'作者'}：<a href="${links[info.author]}" target="_blank">${info.author}</a>${contributors_link}</div>
             <div><i class="mdui-icon material-icons">edit</i>想参与完善页面？<a href="https://github.com/csp-yc/csp-yc.github.io/issues" target="_blank">提交Issues</a> 或 在下方评论</div>
         </div>
     </div>`;

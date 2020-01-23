@@ -31,6 +31,12 @@ function toLocaleDateString(number) {
     return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()<10?'0':''}${date.getMinutes()}:${date.getSeconds()<10?'0':''}${date.getSeconds()}`;
 }
 
+function getAllArticle() {
+    let result = [];
+    for (dir in article) result.push(...tree.getTreeItems(article[dir]));
+    return result;
+}
+
 (function() {
     window.addEventListener('load', function() {
         updateScrollTop();

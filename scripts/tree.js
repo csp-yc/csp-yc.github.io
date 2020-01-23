@@ -71,6 +71,20 @@ var tree = {
             }
         }
     },
+    getTreeItems: function(data) {
+        let result = [];
+        result.push(...data.children.filter(child => child.path));
+        for (let i of data.children.filter(child => child.children)) {
+            result.push(...i.children.filter(child => child.path));
+        }
+        for (let i of data.children.filter(child => child.children)) {
+            for (let j of i.children.filter(child => child.children)) {
+                result.push(...j.children.filter(child => child.path));
+            }
+        }
+        for (i of result.filter(res => !res.dir)) i.dir = data.path;
+        return result;
+    },
     mutation: function() {
         tree.initSerial();
         tree.initIcon();

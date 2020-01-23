@@ -93,7 +93,8 @@ var article = {
                 "title": "线段树",
                 "tags": ["树形结构", "二叉树"],
                 "intro": "Segment Tree",
-                "author": "CSP-YC 团队",
+                "author": "SocialZxy",
+                "contributors": ["dottle"],
                 "date": 1579689823000,
                 "path": "seg.html"
             },
