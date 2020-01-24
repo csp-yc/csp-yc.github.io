@@ -9,7 +9,8 @@ function loadHeadbar() {
             <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
         </div>
         <div class="mdui-tab" mdui-tab>
-            <a href="#" class="mdui-ripple mdui-ripple-white mdui-col-offset-md-1" onclick="gotoPart('intro')" intro>简介</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white mdui-col-offset-md-1" index>首页</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white" onclick="gotoPart('intro')" intro>简介</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">基础算法</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">动态规划</a>
             <a href="#" class="mdui-ripple mdui-ripple-white" onclick="gotoPart('ds')" ds>数据结构</a>
@@ -49,6 +50,11 @@ function loadTab() {
     let path = window.location.href.split('/').slice(-2)[0];
     let tab = document.querySelector('.mdui-tab a[' + path + ']');
     tab.classList.add('mdui-tab-active');
+    document.querySelector('.mdui-tab a[index]').addEventListener('click', function() {
+        setTimeout(function() {
+            window.location.href = '../index.html';
+        }, 300);
+    }, false);
 }
 
 function loadInfo() {
