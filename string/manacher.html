@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manacher - 异常OI</title>
+    <script src="../scripts/import.js"></script>
+</head>
+<body class="mdui-theme-accent-indigo"> 
+    <!--这里是顶栏-->
+    <!--页面主要部分，包括侧边栏和主要容器-->
+    <div id="main" class="mdui-container-fluid" style="margin-top: 150px; margin-bottom: 100px;">
+        <!--这里是侧边栏-->
+        <div class="mdui-col-md-2 mdui-col-offset-md-1" id="sidebar"><div class="tree"></div></div>
+        <!--主要容器-->
+        <div class="mdui-col-md-8 mdui-col-offset-md-3">
+            <div id="article" class="mdui-typo">
+                <h1>Manacher</h1>
+                <h2>问题引入</h2>
+                <p>现在有一个字符串 S，请求出 S 的最长回文子串。</p>
+                <p>让我们从头开始考虑这个问题。</p>
+                <h3>算法 1：暴力</h3>
+                <p>枚举所有子串，判断是否为回文。</p>
+                <p>子串数量显然是 \(n^2\) 个，每次判断回文是 \(O(n)\)，所以复杂度为 \(O(n^3)\)。</p>
+                <h3>算法 2：DP</h3>
+                <p>设 \(f[i][j]\) 表示 i 到 j 这一段子串是否为回文，那么很明显的方程：\(f[i][j]=f[i + 1][j - 1]\)。其中 \(i + 1 < j\)</p>
+                <p>初值：\(f[i][i] = 1\), \(f[i][i + 1] = S[i] \equiv S[i + 1]\)</p>
+                <p>时间复杂度是 \(O(n ^ 2)\)</p>
+                <h3>算法 3：更加强大的枚举</h3>
+                <p>枚举中点 mid，并且由这个中点尝试向两边扩展。</p>
+                <p>时间复杂度是 \(O(n ^ 2)\) 的，但是数据随机的话一般跑不满。要把它卡满也很简单，所有的字符都一样就可以卡掉了。 </p>
+                <h3>算法 4：manacher 算法</h3>
+                <p>我们可以发现，上面的算法都不够优秀。我们需要一个快速的替代品。</p>
+                <p>这个替代品就是 <b>manacher 算法</b>。</p>
+                <h2>算法过程</h2>
+                <p>记录一下几个值：</p>
+                <ul>
+                    <li>i：当前枚举到的中点</li>
+                    <li>maxr：当前访问到的最靠右边的点</li>
+                    <li>mid：访问到 maxr 的中点</li>
+                    <li>数组 d：每个点的最长回文半径</li>
+                </ul>
+                <p>这个算法最大的难点就是 d 的求法。</p>
+                <p>来看一下过程：</p>
+                <p>我们首先枚举 i 点。容易发下，i 一定在 mid 右边。且对于这个 i 点，它有两种情况：在 maxr 的左边/右边</p>
+                <p>如果 i 在 maxr 的左边，那么就会有：</p>
+                <p><img src="https://s2.ax1x.com/2020/02/23/31tzhF.png" origin="SocialZxy"></p>
+                <p>如果 i 在 maxr 的右边，那么我们对 i 附近的情况什么都不知道，所以暂时把 d[i] 复制为 1。</p>
+                <p>接下来我们尝试暴力扩展。如果能访问到 maxr 右边的点，就更新 maxr 和 mid。</p>
+                <h2>复杂度说明</h2>
+                <p>为什么是说明呢？因为过程很不标准。</p>
+                <p>这个算法看起来非常的暴力，但是它其实是 \(O(n)\) 的。</p>
+                <p>根据算法过程，我们可以看出：这个算法的比较次数和 maxr 有关。当 maxr 向右移动的时候才会进行比较。我们设 i 这个位置产生的比较次数为 \(f(i)\)</p>
+                <p>所以 \(f(i) = maxr_i - maxr_{i - 1}\)。</p>
+                <p>总的比较次数为：</p>
+                <p>$$x = \sum\limits_{i = 1}^{n}f(i)~~~~~~~~~~~~~~~~~~~~~~~~~~~~$$</p>
+                <p>$$= \sum\limits_{i = 1}^{n}maxr_i-maxr_{i-1}$$</p>
+                <p>$$= maxr_n - maxr_0~~~~~~~~~$$</p>
+                <p>显然 \(x \leq n\)</p>
+                <p>所以此算法复杂度为 \(O(n)\)。</p>
+                <h2>一些问题的解决方法</h2>
+                <p>看算法过程中，有一个概念叫做“中点”。这就相当于限制了子串的长度为奇数。</p>
+                <p>解决方法是，在原串两个相邻的字符中间插入一个<b>和题目无关的</b>字符。</p>
+                <p>对于可能会发生的数组越界错误，我们的解决方式是：在串头、串尾分别插两个<b>不同且与题目无关的</b>字符</p>
+                <p>我的习惯就是串头插 '$'，中间插 '#'，串尾插 '&'。</p>
+                <h2>代码实现</h2>
+                <pre><code class="hljs cpp">#include<bits/stdc++.h>
+#define min(a,b) (a<b?a:b)
+#define max(a,b) (a>b?a:b)
+using namespace std;
+
+const int N = 50000005;
+char str[N], s[N];
+int n, top = 0, d[N], maxr = 1, mid = 1, ans = 1;
+
+inline int manancher() {
+// 预处理：完成字符间占位符的插入
+int len = strlen(str);
+s[0] = '$', s[1] = '#', top = 1;
+for(register int i = 0; i < len; i++) s[++top] = str[i], s[++top] = '#';
+s[++top] = '&';
+// 算法主要部分
+for(register int i = 1; i < top; i++) {
+    d[i] = i < maxr? min(d[2 * mid - i], maxr - i) : 1; // 分类讨论
+    while(s[i + d[i]] == s[i - d[i]]) d[i]++; // 暴力扩展
+    if(maxr < i + d[i]) maxr = i + d[i], mid = i; // 如果超过了 maxr 就更新
+    ans = max(ans, d[i] - 1); // 更新最长回文子序列长度
+}
+return ans;
+}
+
+int main() {
+scanf("%s", str);
+cout << manancher() << endl;
+return 0;
+}</code></pre>
+            </div>
+        </div>
+    </div>
+    <!--底边栏-->
+    <!--返回顶部按钮-->
+</body>
+
+</html>

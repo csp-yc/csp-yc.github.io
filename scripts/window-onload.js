@@ -17,7 +17,7 @@ function loadHeadbar() {
             <a href="#" class="mdui-ripple mdui-ripple-white">数学</a>
             <a href="#" class="mdui-ripple mdui-ripple-white" onclick="gotoPart('graph')" graph>图论</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">计算几何</a>
-            <a href="#" class="mdui-ripple mdui-ripple-white">字符串</a>
+            <a href="#" class="mdui-ripple mdui-ripple-white" onclick="gotoPart('string')" string>字符串</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">杂项</a>
         </div>
     </div>`;

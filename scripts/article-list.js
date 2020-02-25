@@ -159,5 +159,27 @@ var article = {
                 ]
             }
         ]
+    },
+    "string": {
+        "title": "字符串",
+        "path": "string",
+        "children": [
+            {
+                "title": "字符串简介",
+                "tags": ["简介"],
+                "intro": "字符串板块概述",
+                "author": "CSP-YC 团队",
+                "date": 1582612319000,
+                "path": "intro.html"
+            },
+            {
+                "title": "Manacher",
+                "tags": ["字符串", "最长回文子串"],
+                "intro": "Manacher",
+                "author": "SocialZxy",
+                "date": 1582612319000,
+                "path": "manacher.html"
+            }
+        ]
     }
 };
