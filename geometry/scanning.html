@@ -1,0 +1,246 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫描线 - 异常OI</title>
+    <script src="../scripts/import.js"></script>
+</head>
+<body class="mdui-theme-accent-indigo"> 
+    <!--这里是顶栏-->
+    <!--页面主要部分，包括侧边栏和主要容器-->
+    <div id="main" class="mdui-container-fluid" style="margin-top: 150px; margin-bottom: 100px;">
+        <!--这里是侧边栏-->
+        <div class="mdui-col-md-2 mdui-col-offset-md-1" id="sidebar"><div class="tree"></div></div>
+        <!--主要容器-->
+        <div class="mdui-col-md-8 mdui-col-offset-md-3">
+            <div id="article" class="mdui-typo">
+<h1>扫描线</h1>
+<h2>问题</h2>
+<ol>
+<li>给定 n 个矩形的左下角和右上角坐标，求这 n 个矩形覆盖的区域的总面积。</li>
+<li>给定 n 个矩形的左下角和右上角坐标，求这 n 个矩形构成图形的总周长。</li>
+
+</ol>
+<p>如图所示：</p>
+<p><img src="https://i.loli.net/2020/04/04/SkVb2AzjystW96N.png" origin="SocialZxy" referrerpolicy="no-referrer" alt="封面出现"></p>
+<p>（数据范围：\(n, x_i, y_i\leq500\)）</p>
+<p>这题普及组选手都能做出来，但还是说一下思路<del>来为下文做铺垫</del></p>
+<ol>
+<li><p>开一个二维数组，每个矩形覆盖的位置标 1，其它标 0。</p>
+</li>
+<li><p>对于第一个题，统计 1 的数量。</p>
+<p>对于第二个题，统计 1、0 相间的数量。</p>
+</li>
+
+</ol>
+<p>下面加强数据。</p>
+<p>（\(n \leq 10^5, |x_i|\leq10^9, |y_i|\leq10^9\)）</p>
+<p>显然上面的做法就不行了。我们需要更强大的算法。</p>
+<h2>面积扫描线</h2>
+<h3>思想</h3>
+<p>我们把上图的形状进行一个划分。</p>
+<p><img src="https://i.loli.net/2020/04/05/imZd6aNwlv8GqcY.png" origin="SocialZxy" referrerpolicy="no-referrer" alt="Red and Blue and Green"></p>
+<p>如图所示，三条水平的直线将原图分成了三个部分。</p>
+<p>原图的面积就是\(\sum\text{某条直线截得图形的长度}\times\text{这条直线与下一条直线间得距离}\)</p>
+<h3>具体求法</h3>
+<p>使用<strong>线段树</strong>。</p>
+<p>由于数据很大，我们需要先离散化。</p>
+<p>将边分为两种：上边和下边（顾名思义，上边就是矩形上面的边，下边同理）。每条边赋一个权值，下边赋为 1，上边赋为 -1。</p>
+<p>将所有边按照 y 坐标从低到高排序，然后一条一条加到线段树里。</p>
+<p>线段树维护以下的几个值：</p>
+<ul>
+<li>这个节点管辖的范围 \([l, r + 1]\)（从排名第几的坐标到排名第几的坐标）</li>
+<li>这个节点覆盖的次数 \(cnt\)</li>
+<li>这个节点管辖的范围被覆盖的长度 \(len\)</li>
+
+</ul>
+<p><code>t[1].len</code>即为目前的直线截得图形的长度。</p>
+<p>详见<strong>代码</strong>。</p>
+<h3>代码</h3>
+<pre><code class='language-cpp' lang='cpp'>#include&lt;bits/stdc++.h&gt;
+#define ls (u &lt;&lt; 1)
+#define rs (u &lt;&lt; 1 | 1)
+#define lc ls, l, mid
+#define rc rs, mid + 1, r
+#define mid ((l + r) &gt;&gt; 1)
+#define int long long
+using namespace std;
+
+const int N = 1e6 + 5;
+struct Edge {
+    int l, r, h, w;
+    friend bool operator &lt;(Edge x, Edge y) { return x.h &lt; y.h; }
+} s[N];
+struct Segment {
+    int l, r, len, cnt;
+} t[N &lt;&lt; 1];
+int a[N], n, tot, ans;
+
+inline void build(int u, int l, int r) {
+    t[u].l = l, t[u].r = r;
+    if(l == r) return;
+    build(lc), build(rc);
+}
+
+inline void pushup(int u) {
+    int l = t[u].l, r = t[u].r;
+    if(t[u].cnt) t[u].len = a[r + 1] - a[l]; //如果这个区间被覆盖了，那么长度就是本区间的长度
+    else t[u].len = t[ls].len + t[rs].len; //否则为左右子区间长度之和
+}
+
+inline void update(int u, int l, int r, int x, int y, int val) {
+    if(a[l] &gt;= y || a[r + 1] &lt;= x) return; 
+    if(x &lt;= a[l] &amp;&amp; a[r + 1] &lt;= y) {
+        t[u].cnt += val;
+        pushup(u);
+        return;
+    }
+    update(lc, x, y, val);
+    update(rc, x, y, val);
+    pushup(u);
+}
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin &gt;&gt; n;
+    for(register int i = 1; i &lt;= n; i++) {
+        int x_1, x_2, y_1, y_2;
+        cin &gt;&gt; x_1 &gt;&gt; y_1 &gt;&gt; x_2 &gt;&gt; y_2;
+        s[i] = (Edge){x_1, x_2, y_1, 1}; //上边权值为 1
+        s[n + i] = (Edge){x_1, x_2, y_2, -1}; //下边权值为 -1
+        a[i] = x_1, a[n + i] = x_2; //离散化数组
+    }
+    n *= 2;
+    sort(s + 1, s + 1 + n); //边按照 y 坐标排序
+    sort(a + 1, a + 1 + n); 
+    tot = unique(a + 1, a + 1 + n) - a - 1; //点的排序去重
+    build(1, 1, tot - 1); //建树
+    for(register int i = 1; i &lt; n; i++) {
+        update(1, 1, tot - 1, s[i].l, s[i].r, s[i].w); //把每条边塞进线段树 
+        //cout &lt;&lt; t[1].len &lt;&lt; endl;
+        ans += t[1].len * (s[i + 1].h - s[i].h); //统计答案
+    }
+    cout &lt;&lt; ans;
+    return 0;
+}
+</code></pre>
+<h2>周长扫描线</h2>
+<p>还是那张图。</p>
+<p><img src="https://i.loli.net/2020/04/05/imZd6aNwlv8GqcY.png" origin="SocialZxy" referrerpolicy="no-referrer" alt="Red and Blue and Green"></p>
+<p>每条直线对答案的贡献为\(|这条直线截得图形的长度-上一条直线截得图形的长度|\)</p>
+<p>但是不难看出，这样我们只求了水平边对答案的贡献，没有求竖直边对答案的贡献。</p>
+<p>目前方法有以下两种。</p>
+<h4>扫描一次</h4>
+<p>用线段树维护当前<strong>连续被覆盖的线段有多少段</strong>（记为 x），那么每条直线对答案的贡献为\(|这条直线截得图形的长度-上一条直线截得图形的长度|+2x \times 这条直线与下一条直线距离\)</p>
+<p>x 的维护方法：记录左端点是否被覆盖，右端点是否被覆盖，再在 <code>pushup()</code> 函数里加一点细节就可以了。</p>
+<p>我认为这个方法有些复杂，所以并未使用。</p>
+<h4>扫描两次[建议使用]</h4>
+<p>横竖扫描两次就可以了。把所有东西封装在一个 class 里面可以大大减少代码量。</p>
+<h3>代码</h3>
+<pre><code class='language-cpp' lang='cpp'>#include&lt;bits/stdc++.h&gt;
+#define ls (u &lt;&lt; 1)
+#define rs (u &lt;&lt; 1 | 1)
+#define lc ls, l, mid
+#define rc rs, mid + 1, r
+#define mid ((l + r) &gt;&gt; 1)
+#define int long long
+using namespace std;
+
+const int N = 1e5 + 5;
+class ScannerLine {
+    public: 
+        int a[N], tot = 0, ans = 0, lst = 0, top = 0;
+        struct Edge {
+            int l, r, h, w;
+            friend bool operator &lt;(Edge x, Edge y) {
+                if(x.h == y.h) return x.w &gt; y.w;
+                return x.h &lt; y.h;
+            }
+        } s[N];
+        struct Segment {
+            int l, r, len, cnt;
+        } t[N];
+        inline void push(int l, int r, int h, int w) {
+            //cout &lt;&lt; &quot;push()&quot; &lt;&lt; endl;
+            top++;
+            s[top].l = l;
+            s[top].r = r;
+            s[top].h = h;
+            s[top].w = w;
+            a[++tot] = l, a[++tot] = r;
+        }
+        inline void build(int u, int l, int r) {
+            t[u].l = l, t[u].r = r;
+            if(l == r) return;
+            build(lc), build(rc);
+        }
+        inline void pushup(int u) {
+            int l = t[u].l, r = t[u].r;
+            if(t[u].cnt) t[u].len = a[r + 1] - a[l];
+            else t[u].len = t[ls].len + t[rs].len;
+        }
+        inline void update(int u, int l, int r, int x, int y, int w) {
+            if(a[l] &gt;= y || a[r + 1] &lt;= x) return;
+            if(x &lt;= a[l] &amp;&amp; a[r + 1] &lt;= y) {
+                t[u].cnt += w;
+                pushup(u);
+                return;
+            }
+            update(lc, x, y, w), update(rc, x, y, w);
+            pushup(u);
+        }
+        inline void init() {
+            sort(s + 1, s + 1 + top);
+            sort(a + 1, a + 1 + tot);
+            //cout &lt;&lt; &quot;sort&quot; &lt;&lt; endl;
+            int x = unique(a + 1, a + 1 + tot) - 1 - a;
+            tot = x;
+            //cout &lt;&lt; &quot;unique&quot; &lt;&lt; endl;
+            build(1, 1, tot - 1);
+        }
+        inline int calc() {
+            init();
+            //cout &lt;&lt; &quot;inited&quot; &lt;&lt; endl;
+            int res = 0;
+            for(register int i = 1; i &lt;= top; i++) {
+                update(1, 1, tot - 1, s[i].l, s[i].r, s[i].w);
+                res += abs(t[1].len - lst); //如上所述
+                lst = t[1].len;
+            }
+            return res;
+        }
+} lev, ver; //水平、竖直方向的扫描线
+int n;
+
+signed main() {
+    ios::sync_with_stdio(0);
+    cin &gt;&gt; n;
+    for(register int i = 1; i &lt;= n; i++) {
+        int x_1, y_1, x_2, y_2;
+        cin &gt;&gt; x_1 &gt;&gt; y_1 &gt;&gt; x_2 &gt;&gt; y_2;
+        lev.push(x_1, x_2, y_1, 1), lev.push(x_1, x_2, y_2, -1);
+        ver.push(y_1, y_2, x_1, 1), ver.push(y_1, y_2, x_2, -1);
+    }
+    int ans = lev.calc() + ver.calc();
+    cout &lt;&lt; ans;
+    return 0;
+}
+</code></pre>
+<h2>题目</h2>
+<p>上文的两道题分别是：</p>
+<ol>
+<li><a href='https://www.luogu.com.cn/problem/P5490'>洛谷 P5490 【模板】扫描线</a></li>
+<li><a href='https://www.luogu.com.cn/problem/P1856'>P1856 [USACO5.5]矩形周长Picture</a></li>
+
+</ol>
+<p>&nbsp;</p>
+
+            </div>
+        </div>
+    </div>
+    <!--底边栏-->
+    <!--返回顶部按钮-->
+</body>
+
+</html>

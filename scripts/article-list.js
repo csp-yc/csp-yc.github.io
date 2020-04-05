@@ -181,5 +181,28 @@ var article = {
                 "path": "manacher.html"
             }
         ]
+    },
+    "geometry": {
+        "title": "计算几何",
+        "path": "geometry",
+        "children": [
+            {
+                "title": "计算几何简介",
+                "tags": ["简介"],
+                "intro": "计算几何板块概述",
+                "author": "CSP-YC 团队",
+                "date": 1586009608000,
+                "path": "intro.html"
+            },
+            {
+                "title": "扫描线",
+                "tags": ["计算几何", "线段树"],
+                "intro": "Scanning",
+                "description": "用扫描线求矩形面积并、周长并",
+                "author": "SocialZxy",
+                "date": 1586009608000,
+                "path": "scanning.html"
+            }
+        ]
     }
 };
