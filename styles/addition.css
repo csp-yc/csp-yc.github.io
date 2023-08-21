@@ -202,3 +202,45 @@ pre {
 .tree .check:checked + .tree-item > .mdui-icon {
     transform: rotate(180deg);
 }
+
+@media (max-width: 1024px) {
+#open-menu {
+    background-color: #fff;
+    position: fixed;
+    bottom: 0.5em;
+    left: 0.5em;
+    z-index: 1;
+}
+#open-menu a {
+    font-size: 45px;
+    color: #888;
+    text-decoration: none;
+}
+#close-menu {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    display: none;
+    z-index: -1;
+}
+#sidebar:target #close-menu {
+    display: block;
+}
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: -60%;
+    padding-top: 30%;
+    background-color: #fff;
+    height: 100%;
+    width: 60%;
+    z-index: 2;
+}
+#sidebar:target {
+    left: 0;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+}

@@ -20,7 +20,8 @@ function loadHeadbar() {
             <a href="#" class="mdui-ripple mdui-ripple-white" onclick="gotoPart('string')" string>字符串</a>
             <a href="#" class="mdui-ripple mdui-ripple-white">杂项</a>
         </div>
-    </div>`;
+    </div>
+    <div id="open-menu" class="mdui-fab mdui-ripple mdui-hidden-md-up mdui-text-center"><a href="#sidebar">≡</a></div>`;
 }
 
 function loadFootbar() {

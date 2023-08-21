@@ -54,6 +54,7 @@ var tree = {
             }
         str += 
         '</div>';
+        str += '<a id="close-menu" class="mdui-hidden-md-up" href="#"></a>';
         if (!selector) return str;
         let element = document.querySelector(selector);
         element.outerHTML = str;
