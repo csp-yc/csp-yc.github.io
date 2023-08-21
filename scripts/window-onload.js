@@ -109,10 +109,13 @@ function loadFab() {
 }
 
 function loadHljs() {
-    let script = document.createElement('script');
-    script.src = 'https://highlightjs.org/static/highlight.site.pack.js';
-    document.body.append(script);
-    script.addEventListener('load', function() { hljs.initHighlighting(); }, false);
+    // 以下为老版本(9.17.3)写法，现已失效。
+    // let script = document.createElement('script');
+    // script.src = 'https://highlightjs.org/static/highlight.site.pack.js';
+    // document.body.append(script);
+    // script.addEventListener('load', function() { hljs.initHighlighting(); }, false);
+
+    hljs.highlightAll();
 }
 
 function loadImgOrigin() {
